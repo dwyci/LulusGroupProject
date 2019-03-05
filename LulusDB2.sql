@@ -1,14 +1,16 @@
 CREATE DATABASE lulus;
 
 CREATE TABLE invoice (
-    InvoiceID int not null PRIMARY KEY,
+    InvoiceID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Food varchar(60),
-    Price int,
-    Quantity int
-	);
+    Price DECIMAL(7,2),
+    Quantity int,
+    CustomerID int, 
+    FOREIGN KEY (CustomerID) REFERENCES customer(CustomerID)
+    );
 
 CREATE TABLE customer (
-    CustomerID int PRIMARY KEY,
+    CustomerID int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     Fname varchar(60),
     Lname varchar(60),
     Phone varchar(60),
@@ -16,17 +18,14 @@ CREATE TABLE customer (
     CCnumber varchar(60)	
 );
 
-ALTER TABLE customer
-ADD InvoiceID int;
-
-ALTER TABLE customer
-ADD FOREIGN KEY (InvoiceID) REFERENCES invoice(InvoiceID);
-
 INSERT INTO customer
-VALUES (1, 'Dallas', 'Wyciskalla', 3145551212, 
-'d@system.com', 1234123412341234, 1);
+VALUES (1,'Dallas', 'Wyciskalla', 3145551212, 
+'d@system.com', 1234123412341234);
 
 INSERT INTO invoice
-VALUES (1, 'Loaded Nacho Tots', '6.95', 1 );
+VALUES (1,'Loaded Nacho Tots', 6.95, 1, 1);
 
+
+SELECT * FROM customer;
+SELECT * FROM invoice;
 
